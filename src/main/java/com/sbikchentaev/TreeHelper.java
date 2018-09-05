@@ -13,6 +13,13 @@ public class TreeHelper {
         public static final String SUB = "SUB";
     }
 
+    /**
+     * Рекурсивный метод прохождения по структуре мат операций
+     *
+     * @param t операция
+     * @return значение вычислений
+     * @throws Exception - если в поле {@link OperationsType} незнакомое значение
+     */
     public static double rec(Term t) throws Exception {
         if (t.getOperation() != null) {
             normalizeOperations(t);
@@ -33,6 +40,13 @@ public class TreeHelper {
 
     }
 
+    /**
+     * Исполнение операции если 2 аргумента это числа
+     *
+     * @param t операция
+     * @return значение операции
+     * @throws Exception - если в поле {@link OperationsType} незнакомое значение
+     */
     private static double exec(Term t) throws Exception {
         switch (t.getOperationType()) {
             case SUM:
@@ -48,11 +62,19 @@ public class TreeHelper {
         }
     }
 
+    /**
+     * Хитрый хак чтобы операции размещались в структуре как отдельные члены
+     * @param t - операция
+     */
     private static void normalizeOperations(Term t) {
         t.setOperation1(t.getOperation().get(0));
         t.setOperation2(t.getOperation().get(1));
     }
 
+    /**
+     * Не менее хитрый хак чтобы значения размещались как отдельные члены
+     * @param t - операция
+     */
     private static void normalizeArguments(Term t) {
         t.setArg1(t.getArg().get(0));
         t.setArg2(t.getArg().get(1));
